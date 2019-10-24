@@ -11,27 +11,15 @@ var convert = function(s, numRows) {
   if (numRows < 2 || s.length <= numRows) return s
   let i = 0 // i = current index
   let k = 0 // k = current row
-  let reverse = false // bool to set when to reverse direction
+  let step = 1 // bool to set when to reverse direction
   let arr = new Array(numRows).fill([])
 
   while (i < s.length) {
     arr[k] = [...arr[k], s[i]]
     i++
-    if (!reverse) {
-      if (k == numRows - 1) {
-        reverse = !reverse
-        k--
-      } else {
-        k++
-      }
-    } else if (reverse) {
-      if (k == 0) {
-        reverse = !reverse
-        k++
-      } else {
-        k--
-      }
-    }
+    if (k == numRows - 1) step = -1
+    if (k == 0) step = 1
+    k += step
   }
 
   return arr.flat().join('')
