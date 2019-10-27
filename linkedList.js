@@ -1,8 +1,9 @@
 
-const Node = (data, next = null) => {
+const Node = (data, next = null, prev = null) => {
   return {
     data, 
-    next
+    next,
+    prev
   }
 }
 
@@ -52,25 +53,30 @@ class LinkedList {
   }
   addNode = (node) => {
     this.tail.next = node;
+    node.prev = this.tail;
     this.tail = node;
     this.length++;
   }
   prependNode = (node) => {
+    this.head.prev = node;
     node.next = this.head;
     this.head = node;
     this.length++
   }
   insertNode = (node, index) => {
-    if (index >= this.length) this.addNode(node)
-    let lead = this.traverseToIndex(index - 1)
-    node.next = lead.next
+    if (index >= this.length) this.addNode(node);
+    let lead = this.traverseToIndex(index - 1);
+    node.next = lead.next;
+    lead.next.prev = node;
+    node.prev = lead;
     lead.next = node;
-    this.length++
+    this.length++;
   }
   removeNode = (index) => {
     let lead = this.traverseToIndex(index - 1);
     let toRemove = lead.next
     lead.next = lead.next.next
+    lead.next.prev = lead
     toRemove = null;
     this.length--
   }
