@@ -18,17 +18,12 @@ var removeNthFromEnd = function(head, n) {
   }
 
   if (tempArr[tempArr.length - n - 1]) {
-    console.log("==|> -n-1:",tempArr[tempArr.length - n - 1])
     tempArr[tempArr.length - n - 1].next = tempArr[tempArr.length - n - 1].next.next
   } else {
-    console.log("===|=|> other:", tempArr[tempArr.length - n + 1])
     tempArr[tempArr.length - n] = tempArr[tempArr.length - n + 1]
   }
 
   head = tempArr[0]
-
-  // tempArr[0].next = tempArr[0].next ? tempArr[0].next.next : null
-  // tempArr[1] = null
 
   return [head.val]
 };
