@@ -3,41 +3,43 @@ const longestPalindrome = function(s) {
 
   let longestPal = '';
 
-  // for (let i = 1; i < s.length - 1; i++) {
-  //   let j = i + 1;
-  //   let k = i - 1;
-  //   let a = s[k];
-  //   let b = s[j];
-  //   while (a === b) {
-  //     j++;
-  //     k--;
-  //     a = s[k];
-  //     b = s[j];
-  //   }
-  //   if (j - k - 1 > longestPal.length) {
-  //     longestPal = s.split('').slice((k+1),j).join('')
+  for (let i = 1; i < s.length - 1; i++) {
+    longestPal = [longestPal, helper(s,i,i), helper(s, i, i+1)].reduce((max = '', curr) => curr.length > max.length ? curr : max)
+  }
+
+  // for (let i = 0; i < s.length; ++i) {
+  //   let end = s.length - 1;
+
+  //   while (end > i) {
+  //     if (s[i] === s[end]) {
+  //       let temp = s.slice(i,end + 1);
+  //       if (isPalindrome(temp)) {
+  //         longestPal = temp.length > longestPal.length ? temp : longestPal
+  //       }
+  //       if (longestPal.length >= s.length/2) break;
+  //       --end;
+  //       continue;
+  //     }
+  //     --end;
   //   }
   // }
 
-  for (let i = 0; i < s.length; ++i) {
-    let end = s.length - 1;
+  return longestPal
+};
 
-    while (end > i) {
-      if (s[i] === s[end]) {
-        let temp = s.slice(i,end + 1);
-        if (isPalindrome(temp)) {
-          longestPal = temp.length > longestPal.length ? temp : longestPal
-        }
-        if (longestPal.length >= s.length/2) break;
-        --end;
-        continue;
-      }
-      --end;
-    }
+const helper = (s, l, r) => {
+  while (l >= 0 && r < s.length && s[l] === s[r]) {
+    --l;
+    ++r;
   }
 
-  return longestPal.length > 1 ? longestPal : s[0]
-};
+  if (s[l + 1] === s[r - 1]) {
+    return s.slice(l + 1, r)
+  } else {
+    return s[l + 1]
+  }
+    
+}
 
 const isPalindrome = (s) => {
   let start = 0;
