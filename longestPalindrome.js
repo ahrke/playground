@@ -38,7 +38,6 @@ const helper = (s, l, r) => {
   } else {
     return s[l + 1]
   }
-    
 }
 
 const isPalindrome = (s) => {
