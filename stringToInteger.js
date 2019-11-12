@@ -1,17 +1,24 @@
 var myAtoi = function(str) {
-  if (str.length === 0 || str.trim().length === 0 || str.trim()[0].search((/[0-9-+]+/)) < 0 || (str.trim().length === 1 && str.trim()[0] === '-')) return 0;
-  if (str.includes('-') && str.includes('+')) return 0;
+
   const MAX_INT = Math.pow(2, 31) - 1;
   const MIN_INT = Math.pow(-2, 31);
 
-  // str = str.replace(/([^0-9-.])+/, '');
-  // str = str.trim().split(/([^0-9-+.])+/)[0]
-  str = str.match(/([-+]?[0-9.]+)/g)
+  let i = 0;
+  while (str[i] === ' ') {
+    str[i] = '';
+    i++
+  }
 
-  if (Number(str) > MAX_INT) return MAX_INT;
-  if (Number(str) < MIN_INT) return MIN_INT;
+  let sign = str[i] === '-' ? -1 : 1;
+  if (str[i] && str[i].match(/[-+]/)) i++
+  let result = 0;
 
-  return Number(Math.floor(str));
+  while (str[i] && str[i].match(/[0-9]/)) {
+    result = (result * 10) + Number(str[i]);
+    i++;
+  }
+
+  return Math.max(MIN_INT, Math.min(sign * result, MAX_INT)) 
 };
 
 console.log(myAtoi("42"))
@@ -23,4 +30,7 @@ console.log(myAtoi("3.14159"))
 console.log(myAtoi("+-2"))
 console.log(myAtoi("  -0012a42"))
 console.log(myAtoi("+1"))
+console.log(myAtoi(" "))
 console.log(myAtoi("-5-"))
+console.log(myAtoi("+"))
+console.log(myAtoi("1"))
