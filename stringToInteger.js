@@ -13,7 +13,7 @@ var myAtoi = function(str) {
   if (str[i] && str[i].match(/[-+]/)) i++
   let result = 0;
 
-  while (str[i] && str[i].match(/[0-9]/)) {
+  while (str[i] && (/[0-9]/).test(str[i])) {
     result = (result * 10) + Number(str[i]);
     i++;
   }
