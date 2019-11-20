@@ -4,7 +4,6 @@ const fourSum = function(nums, target) {
   let results = [];
   nums = nums.sort((a,b) => a - b);
   for (let i = 0; i < nums.length - 3; i++) {
-    if (nums[i] > target) break;
     threeSum(nums.slice(i + 1), target - nums[i], nums[i], results)
   }
 
@@ -41,6 +40,7 @@ const threeSum = (nums, target, result, results) => {
   }
 }
 
-console.log(fourSum([1, 0, -1, 0, -2, 2], 0))
-console.log(fourSum([-3,-2,-1,0,0,1,2,3], 0))
+// console.log(fourSum([1, 0, -1, 0, -2, 2], 0))
+// console.log(fourSum([-3,-2,-1,0,0,1,2,3], 0))
+console.log(fourSum([1,-2,-5,-4,-3,3,3,5], -11))
 // console.log(threeSum([1, 0, -1, 0, -2, 2], 0, []))
