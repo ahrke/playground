@@ -20,7 +20,7 @@ var threeSumClosest = function(nums, target) {
         l--;
       } else if(s < target) {
         k++;
-      } 
+      }
     }
   }
 
